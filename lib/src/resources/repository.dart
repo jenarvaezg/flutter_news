@@ -5,7 +5,7 @@ import 'news_db_provider.dart';
 
 import 'package:flutter_news/src/models/item_model.dart';
 
-class NewsRepository {
+class Repository {
   List<NewsSource> sources = <NewsSource>[
     newsDbProvider,
     NewsApiProvider(),

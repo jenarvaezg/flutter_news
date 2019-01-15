@@ -1,5 +1,5 @@
 import 'dart:convert' show json;
-import 'package:flutter_news/src/resources/news_repository.dart';
+import 'package:flutter_news/src/resources/repository.dart';
 import 'package:http/http.dart' show Client;
 import 'package:flutter_news/src/models/item_model.dart';
 

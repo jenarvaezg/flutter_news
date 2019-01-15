@@ -8,18 +8,21 @@ class NewsListTile extends StatelessWidget {
 
   NewsListTile(this.itemId);
 
-  _buildTile(ItemModel item) {
+  _buildTile(BuildContext context, ItemModel item) {
     return Column(
       children: <Widget>[
         ListTile(
           title: Text(item.title),
-          subtitle: Text('${item.score}'),
+          subtitle: Text('${item.score} votes'),
           trailing: Column(
             children: <Widget>[
               Icon(Icons.comment),
               Text('${item.descendants}'),
             ],
           ),
+          onTap: () {
+            Navigator.pushNamed(context, '/${item.id}');
+          },
         ),
         Divider(
           height: 8.0,
@@ -46,12 +49,10 @@ class NewsListTile extends StatelessWidget {
             if (!snapshot.hasData) {
               return LoadingContainer();
             }
-            return _buildTile(snapshot.data);
+            return _buildTile(context, snapshot.data);
           },
         );
       },
     );
   }
 }
-
-class _buildTile {}

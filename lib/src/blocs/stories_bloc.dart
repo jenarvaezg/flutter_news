@@ -1,10 +1,10 @@
 import 'package:flutter_news/src/models/item_model.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:flutter_news/src/resources/news_repository.dart';
+import 'package:flutter_news/src/resources/repository.dart';
 
 class StoriesBloc {
-  final _repository = NewsRepository();
+  final _repository = Repository();
   final _topIds = PublishSubject<List<int>>();
   final _itemsOutput = BehaviorSubject<Map<int, Future<ItemModel>>>();
   final _itemsFetcher = PublishSubject<int>();
@@ -15,7 +15,6 @@ class StoriesBloc {
 
   // Getters to Sinks
   Function(int) get fetchItem => _itemsFetcher.sink.add;
-
 
   StoriesBloc() {
     _itemsFetcher.stream.transform(_itemsTransformer()).pipe(_itemsOutput);
@@ -31,7 +30,7 @@ class StoriesBloc {
   }
 
   _itemsTransformer() {
-    return ScanStreamTransformer(
+    return ScanStreamTransformer<int, Map<int, Future<ItemModel>>>(
       (Map<int, Future<ItemModel>> cache, int id, int index) {
         cache[id] = _repository.fetchItem(id);
         return cache;

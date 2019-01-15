@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news/src/blocs/stories_provider.dart';
-import 'package:flutter_news/src/resources/news_repository.dart';
+import 'package:flutter_news/src/resources/repository.dart';
 import 'package:flutter_news/src/widgets/news_list_tile.dart';
 import 'package:flutter_news/src/widgets/refresh.dart';
 
 class NewsList extends StatelessWidget {
-  final NewsRepository newsRepository = NewsRepository();
+  final Repository repository = Repository();
 
   @override
   Widget build(BuildContext context) {
     final bloc = StoriesProvider.of(context);
-
-    // TODO MOVE FROM HERE
-    bloc.fetchTopIds();
 
     return Scaffold(
       appBar: AppBar(
